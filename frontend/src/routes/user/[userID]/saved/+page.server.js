@@ -2,7 +2,7 @@
 import { redirect, error } from '@sveltejs/kit';
 import { serializeNonPOJOs } from '$lib/utils'
 
-export const load = ({locals, params}) => {
+export const load = async ({locals, params}) => {
 
 
     if (!locals.pb.authStore.isValid) {
@@ -39,7 +39,7 @@ export const load = ({locals, params}) => {
     }
 
     return {
-        savedPosts : getSavedPosts()
+        savedPosts : await getSavedPosts()
     }
 
 

@@ -3,7 +3,7 @@ import { serializeNonPOJOs } from '$lib/utils'
 
 
 
-export const load = ({ locals }) => {
+export const load = async ({ locals }) => {
 
     if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
@@ -34,7 +34,7 @@ export const load = ({ locals }) => {
     }
 
     return {
-        followRequests : getFollowRequests()
+        followRequests : await getFollowRequests()
     }
 }
 

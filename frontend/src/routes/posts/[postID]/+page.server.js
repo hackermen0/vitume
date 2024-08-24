@@ -4,7 +4,7 @@ import { commentSchema } from '$lib/schemas';
 import { validateData } from '$lib/utils';
 
 
-export const load = ({ locals, params }) => {
+export const load = async ({ locals, params }) => {
 
     if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
@@ -96,11 +96,11 @@ export const load = ({ locals, params }) => {
 
     
     return {
-        post: getPost(params.postID),
-        comments: getComments(params.postID),
-        postLike: getPostLikes(params.postID),
-        postSave : getPostSaved(params.postID),
-        commentLikes: getCommentLikes(params.postID)
+        post: await getPost(params.postID),
+        comments: await getComments(params.postID),
+        postLike: await getPostLikes(params.postID),
+        postSave : await getPostSaved(params.postID),
+        commentLikes: await getCommentLikes(params.postID)
   
     }
 

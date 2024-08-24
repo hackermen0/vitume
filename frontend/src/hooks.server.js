@@ -2,7 +2,9 @@ import PocketBase from 'pocketbase'
 import { serializeNonPOJOs } from '$lib/utils'
 
 export const handle = async ({ event, resolve }) => {
-    event.locals.pb = new PocketBase('http://localhost:8090')
+    // http://127.0.0.1:8090/
+    // https://social-media.pockethost.io/
+    event.locals.pb = new PocketBase('https://social-media.pockethost.io/')
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get("cookie") || "")
 
     try {
@@ -18,7 +20,7 @@ export const handle = async ({ event, resolve }) => {
     const response = await resolve(event)
 
     response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({
-        secure : false
+        secure : true
     }))
 
     return response

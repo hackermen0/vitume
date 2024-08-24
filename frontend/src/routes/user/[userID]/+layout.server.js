@@ -3,7 +3,7 @@ import { error, redirect } from "@sveltejs/kit"
 
 
 
-export const load = ({ locals, params, event }) => {
+export const load = async ({ locals, params, event }) => {
 
     if (!locals.pb.authStore.isValid) {
         console.log(event)
@@ -63,9 +63,9 @@ export const load = ({ locals, params, event }) => {
     }
 
     return {
-        user : getUser(),
+        user : await getUser(),
         userID : locals.user.id,
-        followStatus : followStatus()
+        followStatus : await followStatus()
     }
 }
 

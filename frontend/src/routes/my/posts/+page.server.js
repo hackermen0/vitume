@@ -21,12 +21,11 @@ export const load = async ({ url , locals }) => {
     }
 
     return {
-        posts: getUsersProjects(locals.user.id)
+        posts: await getUsersProjects(locals.user.id)
     }
 
 }
 
-/** @type {import('./$types').Actions} */
 export const actions = {
     deletePost: async ({ request, locals }) => {
         const { id } = Object.fromEntries(await request.formData())

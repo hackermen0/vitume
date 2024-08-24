@@ -2,7 +2,7 @@ import { serializeNonPOJOs } from '$lib/utils'
 import { error, redirect } from "@sveltejs/kit"
 
 
-export const load = ({ locals }) => {
+export const load = async ({ locals }) => {
 
     if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
@@ -22,8 +22,6 @@ export const load = ({ locals }) => {
         //     expand: 'user',
         // }))
 
-    
-        console.log(posts)
         return posts
 
 
@@ -35,7 +33,7 @@ export const load = ({ locals }) => {
 
 
     return {
-        posts: getPosts()
+        posts: await getPosts()
     }
 
 }
